@@ -1,44 +1,26 @@
-// CONSTRUCTOR
-        // jquery
-        var head = document.head
-        var jQueryScript = document.createElement('script');  
-        jQueryScript.setAttribute('src','./jquery-3.5.1.slim.min.js')
-        // jQueryScript.setAttribute('crossOrigin','anonymous')
-        // jQueryScript.setAttribute('integrity',"sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=")
-        head.insertBefore(jQueryScript,head.childNodes[0])
-        // boostrap's css
-        var css = document.createElement('link')
-        css.setAttribute('href','./bootstrap.min.css')
-        head.insertBefore(css,head.childNodes[1])
-        // bootstrap's js
-        var js = document.createElement('script')
-        js.setAttribute('src',"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js")
-        head.insertBefore(js,head.childNodes[2])
-function pageFind() {
-
-}
 $(document).ready(function(){
     // GLOBAL
         // HEADER
-            // wrap nav from body to hr
-    $('h1:first-child').nextUntil('hr').addBack().wrapAll("<nav class='navbar navbar-expand static-top'/>")
-    // add class to div inside navbar
-    $('nav:first-child div').addClass('navbar-nav ml-auto btn-group')
-    $('.navbar-nav a').addClass('btn-primary')
-    $('nav:first-child div a').addClass('btn')
-    $('body').addClass('container')
-        // FOOTER
-    $('footer div').addClass('row')
-    $('footer .row ul').addClass('btn-group col-6')
-    $('footer .row a').addClass('btn text-primary')
-    $('footer .row ul').css('list-style-type','none')
-    $('footer .row p').addClass('col-6')
-    
+        // wrap nav from body to hr
+            $('h2:first').addClass('d-flex justify-content-center')
+            $('h1:first').nextUntil('hr').addBack().wrapAll("<nav class='navbar navbar-expand static-top'/>")
+        // add class to div inside navbar
+            $('nav:first-child div').addClass('navbar-nav ml-auto btn-group')
+            $('.navbar-nav a').addClass('btn-primary')
+            $('nav:first-child div a').addClass('btn')
+            $('body').addClass('container')
+         // FOOTER
+            $('footer div').addClass('row')
+            $('footer .row ul').addClass('btn-group col-6')
+            $('footer .row a').addClass('btn text-primary')
+            $('footer .row ul').css('list-style-type','none')
+            $('footer .row p').addClass('col-6')
+
     // SPECIFIC PAGE
         // *index.html
-            // picture create
             if("index.html".localeCompare(document.location.href.match(/[^\/]+$/)[0])==0)
             {
+                // picture slide
                 var carouselInnerDiv = document.createElement('div')
                 carouselInnerDiv.className='carousel-inner'
                 var pictures = new Array()
@@ -71,25 +53,45 @@ $(document).ready(function(){
                 $('.jumbotron h4').nextUntil('.jumbotron a').addBack().wrapAll("<div class='display-5 ml-3'/>")
                 $('.jumbotron a').addClass('float-right mr-5')
             }
-    // $('hr:last').prevUntil('h4:last').addClass('jumbotron jumbotron-fluid')
-    // // wrap from 4 thr:first-childh div to prev to hr
-    // $('div').slice(3).prevUntil('hr').wrapAll("<div class='carousel slide w-75 mx-auto'/>")
-    // // carousel inner wrap
-    // $('.carousel').wrapInner("<div class='carousel-inner'/>")
-    // // make all div inside carousel-item
-    // $('.carousel .carousel-inner div').addClass('carousel-item')
-    // // format all img inside
-    // $('.carousel .carousel-inner img').addClass("d-block w-100")
-    // $('.carousel .carousel-inner img').css('height','500px')
-    // // wrap caption inside each 
-    // $('.carousel .carousel-inner h4').each(function() {
-    //     $(this).next('p').addBack().wrapAll("<div class='carousel-caption w-75 d-none d-md-block bg-secondary font-weight-bold'/>")
-    // })
-    // $('.carousel .carousel-inner .carousel-caption').css('opacity','0.7')
-    // // add first active
-    // $('.carousel .carousel-inner .carousel-item:last-child').addClass('active')
-    // // control button
-    console.log(document.location.href.match(/[^\/]+$/)[0])
 
-    // )
+            // *about.html
+            if("about.html".localeCompare(document.location.href.match(/[^\/]+$/)[0])==0)
+            {
+                $("hr").eq(1).nextUntil('hr').wrapAll("<div class='row'>")
+                $('.row div').addClass('col-6')
+                $(".row img").addClass('col-6')
+            }
+            // *service.html
+            if("service.html".localeCompare(document.location.href.match(/[^\/]+$/)[0])==0)
+            {
+                $('hr').eq(1).nextUntil('hr').wrapAll("<div class='row'>")
+                $('.row div').addClass('col-4')
+                $('.row').children('div').each(function(){
+                    $(this).find('p:first').addClass('border rounded text-center col-12')
+                    $(this).find('div').addClass('border rounded col-12 d-flex px-0 flex-column justify-content-around text-center')
+                    $(this).find('div p:first').wrap("<div class='border p-0 jumbotron m-0'>")
+                    $(this).find('div p:first').addClass('mt-3')
+                    $(this).find('div p').addClass('m-3')
+                    $(this).find('a').wrap("<div class='border pt-3 pb-3 jumbotron m-0'>")
+                    $(this).find('a').addClass('btn btn-primary')
+                })
+            }
+            // *faq
+            if("faq.html".localeCompare(document.location.href.match(/[^\/]+$/)[0])==0)
+            {
+                $('hr').eq(1).nextUntil('hr').wrapAll("<div id='collapseContainer'>")
+                let i=0
+                $('#collapseContainer').children('div').each(function(){
+                    let collapseString
+                    let showString
+                    i==0 ? collapseString="" : collapseString=" collapsed"
+                    i==0 ? showString=" show" : showString=""
+                    $(this).addClass('card')
+                    $(this).find('p:first').wrap("<button class='btn btn-link"+collapseString+"' data-toggle='collapse' data-target='#collapse"+i+"' aria-expanded='true' aria-controls='collapse"+i+"'/>")
+                    $(this).find('button:first').wrap("<div class='card-header pt-2 pb-0' id='heading"+i+"'/>")
+                    $(this).find('p:last').wrap("<div id='collapse"+i+"' class='collapse"+showString+"' data-parent='#collapseContainer' aria-labelledby='heading"+i+"'/>")
+                    $(this).find('div:last').wrapInner("<div class='card-body'/>")
+                    i++
+                })
+            }
 })
