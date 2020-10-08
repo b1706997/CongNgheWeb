@@ -1,4 +1,18 @@
-$(document).ready(function(){
+// CONSTRUCTOR
+var jquery = document.createElement('script');
+jquery.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+jquery.type = 'text/javascript';
+jquery.crossOrigin = "anonymous"
+var bs = document.createElement('script');
+bs.src = 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js';
+bs.type = 'text/javascript';
+var bs_css = document.createElement('link')
+bs_css.href = 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css'
+bs_css.rel = 'stylesheet'
+document.getElementsByTagName('head')[0].insertAdjacentElement('afterbegin',jquery);
+jquery.onload  =  function () { document.getElementsByTagName('head')[0].insertAdjacentElement('afterend',bs_css); bs_css.onload = function () { document.getElementsByTagName('head')[0].insertAdjacentElement('afterend',bs); bs.onload = function () {
+
+    $(document).ready(function(){
     // GLOBAL
         // HEADER
         // wrap nav from body to hr
@@ -94,4 +108,5 @@ $(document).ready(function(){
                     i++
                 })
             }
-})
+    })
+} } }
