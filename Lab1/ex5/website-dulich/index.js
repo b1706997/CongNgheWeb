@@ -11,7 +11,6 @@ bs_css.href = 'https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.
 bs_css.rel = 'stylesheet'
 document.getElementsByTagName('head')[0].insertAdjacentElement('afterbegin',jquery);
 jquery.onload  =  function () { document.getElementsByTagName('head')[0].insertAdjacentElement('afterend',bs_css); bs_css.onload = function () { document.getElementsByTagName('head')[0].insertAdjacentElement('afterend',bs); bs.onload = function () {
-
     $(document).ready(function(){
     // GLOBAL
         // HEADER
@@ -106,6 +105,20 @@ jquery.onload  =  function () { document.getElementsByTagName('head')[0].insertA
                     $(this).find('p:last').wrap("<div id='collapse"+i+"' class='collapse"+showString+"' data-parent='#collapseContainer' aria-labelledby='heading"+i+"'/>")
                     $(this).find('div:last').wrapInner("<div class='card-body'/>")
                     i++
+                })
+            }
+            // *contact.html
+            if("contact.html".localeCompare(document.location.href.match(/[^\/]+$/)[0])==0)
+            {
+                $('hr:first').nextUntil('hr').wrapAll("<div class='row'/>")
+                $(".row > div:first").addClass('col-9')
+                $('.row > div:last').addClass('col-3')
+                $('.row > div:first form').addClass('form-horizontal')
+                $('.row > div:first form').attr('role','form')
+                $('.row > div:first form > label').each(function(){
+                    $(this).next().addBack().wrapAll("<div class='form-group row'/>")
+                    $(this).next().addClass('form-control col-9')
+                    $(this).addClass('col-3 font-weight-bold')
                 })
             }
     })

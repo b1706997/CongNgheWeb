@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Bài tập 1</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="page-header">Các đoạn phim hay nhất</h2>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+              <ul>
+                  <li><a href="https://www.youtube.com/watch?v=TddFnTB_7IM">Trip through the 80s</a></li>
+                  <li><a href="https://www.youtube.com/watch?v=epUk3T2Kfno">Otters Holding Hands</a></li>
+                  <li><a href="https://www.youtube.com/watch?v=il2IrgFHfsg">The Ooooh Cattttttt</a></li>
+              </ul>
+          </div>
+
+        </div>
+        
+    </div>
+
+    <script src="youtube.js"></script>
+    <script src="../jquery-3.5.1.slim.min.js"></script>
+    <script>
+        // Mã lệnh được viết tại đây
+        $('div.container div.row div.col-md-3 ul li a').each(function(index,elem) {
+            const imgSrc = youtube.generateThumbnailUrl(elem.href)
+            $(this).html(`<img src='`+imgSrc+`'/>`)
+        })
+
+        $('div.container div.row:last').append(`<div id='show' class='col-sm-9 bg-primary'></div>`)
+    
+        $(document).ready(()=>{
+            $('div.container div.row:last div.col-md-3 ul li a').each((elem)=>{
+                $(this).on('click',(e)=>{
+                    e.preventDefault()
+                    const src = youtube.generateEmbedUrl()
+                })
+            })
+        })
+    </script>
+
+</body>
+
+</html>
+
